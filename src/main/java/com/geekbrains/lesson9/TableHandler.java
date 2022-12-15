@@ -33,6 +33,9 @@ public class TableHandler {
         }
     }
 
+    //        1. Реализуйте возможность разметки класса с помощью набора ваших собственных аннотаций
+    //        (@Table(title), @Column). Напишите обработчик аннотаций, который позволит по размеченному
+    //        классу построить таблицу в базе данных.
     public static void buildTable(Class classTable) {
         try {
             connect();
@@ -75,7 +78,10 @@ public class TableHandler {
         }
 
     }
-
+    //        2. * Второй обработчик аннотаций должен уметь добавлять объект размеченного класса в
+    //        полученную таблицу.
+    //        Замечание: Считаем что в проекте не связанных между собой сущностей, чтобы не
+    //        продумывать логику их взаимодействия.
     public static void addObjectInTable(Student student) {
         try {
             connect();
@@ -111,7 +117,7 @@ public class TableHandler {
             stringBuilder.setLength(stringBuilder.length() - 2);
             stringBuilder.append(") ");
             preparedStatement = connection.prepareStatement(stringBuilder.toString());
-            //Как тут сделать через setObject в цикле, предварительно кастанув к типу поля?
+            //Как тут сделать через setObject в цикле?
             preparedStatement.setInt(1, student.id);
             preparedStatement.setString(2, student.name);
             try {
