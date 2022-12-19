@@ -9,11 +9,11 @@ public class TableHandler {
     private static Connection connection;
     private static Statement statement;
     private static PreparedStatement preparedStatement;
-
+    private static final String jdbcConnection = "jdbc:sqlite:main.db";
     public static void connect() throws SQLException {
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:main.db");
+            connection = DriverManager.getConnection(jdbcConnection);
             statement = connection.createStatement();
         } catch (ClassNotFoundException | SQLException e) {
             throw new SQLException("Unable to connect");
@@ -118,6 +118,7 @@ public class TableHandler {
             stringBuilder.append(") ");
             preparedStatement = connection.prepareStatement(stringBuilder.toString());
             //Как тут сделать через setObject в цикле?
+
             preparedStatement.setInt(1, student.id);
             preparedStatement.setString(2, student.name);
             try {
